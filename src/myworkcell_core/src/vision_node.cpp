@@ -11,9 +11,13 @@ bool localizePart(myworkcell_core::LocalizePart::Request& req,
 {
   // Read last message
   geometry_msgs::Pose p;
-  p.position.x = 1;
-  p.position.y = 2;
-  p.position.z = 3;
+  p.position.x = 1.0;
+  p.position.y = 2.0;
+  p.position.z = 3.0;
+  p.orientation.x = 4.0;
+  p.orientation.y = 5.0;
+  p.orientation.z = 6.0;
+  p.orientation.w = 7.0;
 
   res.pose = p;
   return true;
