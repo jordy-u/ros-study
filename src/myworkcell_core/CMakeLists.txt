@@ -12,8 +12,17 @@ find_package(catkin REQUIRED COMPONENTS
   fake_ar_publisher
   geometry_msgs
   message_generation
+  genmsg
+  actionlib_msgs #for packages that include .action files
+  #actionlib #for packages that depend on packages with the action-API (those packages themself should also include it)
 )
 
+add_action_files(
+  DIRECTORY
+  action
+  FILES
+  DoDishes.action
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -72,6 +81,7 @@ add_service_files(
 generate_messages(
   DEPENDENCIES
   geometry_msgs
+  actionlib_msgs
 )
 
 ################################################
@@ -103,6 +113,7 @@ generate_messages(
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES myworkcell_core
