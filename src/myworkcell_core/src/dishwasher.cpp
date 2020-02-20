@@ -1,9 +1,9 @@
 #include <myworkcell_core/DoDishesAction.h>  // Note: "Action" is appended
 #include <actionlib/server/simple_action_server.h>
 
-typedef actionlib::SimpleActionServer<chores::DoDishesAction> Server;
+typedef actionlib::SimpleActionServer<myworkcell_core::DoDishesAction> Server;
 
-void execute(const chores::DoDishesGoalConstPtr& goal, Server* as)  // Note: "Action" is not appended to DoDishes here
+void execute(const myworkcell_core::DoDishesGoalConstPtr& goal, Server* as)  // Note: "Action" is not appended to DoDishes here
 {
   // Do lots of awesome groundbreaking robot stuff here
   as->setSucceeded();

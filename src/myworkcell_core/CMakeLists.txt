@@ -14,7 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   genmsg
   actionlib_msgs #for packages that include .action files
-  #actionlib #for packages that depend on packages with the action-API (those packages themself should also include it)
+  actionlib #for packages that depend on packages with the action-API (those packages themself should also include it)
 )
 
 add_action_files(
@@ -82,6 +82,7 @@ generate_messages(
   DEPENDENCIES
   geometry_msgs
   actionlib_msgs
+  std_msgs
 )
 
 ################################################
@@ -120,10 +121,11 @@ catkin_package(
 #  CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
   CATKIN_DEPENDS
-    roscpp
-    fake_ar_publisher
-    message_runtime
-    geometry_msgs
+  roscpp
+  fake_ar_publisher
+  message_runtime
+  geometry_msgs
+  actionlib_msgs
 )
 
 ###########
@@ -153,6 +155,7 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/myworkcell_core_node.cpp)
 add_executable(vision_node src/vision_node.cpp)
 add_executable(myworkcell_node src/myworkcell_node.cpp)
+add_executable(dishwasher src/dishwasher.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -165,7 +168,7 @@ add_executable(myworkcell_node src/myworkcell_node.cpp)
 #add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(vision_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(myworkcell_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
+add_dependencies(dishwasher ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -173,6 +176,7 @@ add_dependencies(myworkcell_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EX
 # )
 target_link_libraries(vision_node ${catkin_LIBRARIES})
 target_link_libraries(myworkcell_node ${catkin_LIBRARIES})
+target_link_libraries(dishwasher ${catkin_LIBRARIES})
 
 
 #############
