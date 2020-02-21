@@ -1,15 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(smr1_moveit_config)
+project(ur10_moveit_config)
 
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-)
+find_package(catkin REQUIRED)
 
-catkin_package(
-)
+catkin_package()
 
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+if (CATKIN_ENABLE_TESTING)
+  find_package(roslaunch REQUIRED)
+  roslaunch_add_file_check(tests/moveit_planning_execution.xml)
+endif()
 
+install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(DIRECTORY config DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
