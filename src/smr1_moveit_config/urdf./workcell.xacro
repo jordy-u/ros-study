@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<robot name="myworkcell" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <material name="blue">
+        <color rgba="0 0 0.8 1" />
+    </material>
+
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <material name="black">
+            <color rgba="0.1 0.1 0.1 1" />
+    </material>
+
+    <material name="gray">
+            <color rgba="0.7 0.7 0.7 1" />
+    </material>
+
+    <material name="yellow">
+            <color rgba="0.9 0.8 0.3 1" />
+    </material>
+
+    <material name="poster">
+            <texture filename="package://smr1_moveit_config/poster.png"/>
+    </material>
+
+    <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+
+    <xacro:ur5_robot prefix="" joint_limited="true"/>
+    <joint name="env_to_robot" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.880" rpy="0 0 3.14"/>
+    </joint>
+
+    <joint name="eoat_to_tool0" type="fixed">
+        <parent link="tool0" />
+        <child link="eoat" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="world" />
+ 
+    <link name="poster">
+        <visual>
+            <geometry>
+                <box size="1.5 1.059 0.0"/>
+            </geometry>
+             <origin xyz="2.0 0.0 -0.675" rpy="0 0 0" />
+            <material name="poster" />
+        </visual>
+    </link>
+    <link name="table">
+        <visual>
+            <geometry>
+                <box size="2.0 0.70 0.860"/>
+            </geometry>
+            <origin xyz="0.0 -0.225 0.43" rpy="0 0 0" />
+            <material name="yellow" />
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="2.0 0.70 0.860"/>
+            </geometry>
+            <origin xyz="0.0 -0.225 0.44" rpy="0 0 0.0" />
+        </collision>
+    </link>
+    <link name="back_wall">
+        <visual>
+            <geometry>
+                <box size="4.0 0.10 3.0"/>
+            </geometry>
+            <origin xyz="0.0 0.73 1.5" rpy="0 0 0" />
+            <material name="gray" />
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="4.0 0.10 3.0"/>
+            </geometry>
+            <origin xyz="0.0 0.73 1.5" rpy="0 0 0" />
+        </collision>
+    </link>
+    
+    <link name="eoat">
+        <visual>
+            <geometry>
+                <mesh filename="package://smr1_moveit_config/urdf/eoat_v2.stl" />
+            </geometry>
+             <origin xyz="0 0 0.17" rpy="-1.57 0 -2.35" />
+            <material name="white" />
+        </visual>
+    </link>
+
+    <joint name="world_to_table" type="fixed">
+        <parent link="world" />
+        <child link ="table" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <joint name="world_to_back_wall" type="fixed">
+        <parent link="world" />
+        <child link ="back_wall" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+
+    <joint name="world_to_poster" type="fixed">
+        <parent link="world" />
+        <child link ="poster" />
+        <origin xyz="0 0 0" rpy="0 -1.57 1.57" />
+    </joint>
+</robot>
