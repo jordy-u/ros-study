@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
 
-  <name>ur10_moveit_config</name>
+  <name>smr1_moveit_config</name>
   <version>1.2.7</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the ur10 with the MoveIt Motion Planning Framework
